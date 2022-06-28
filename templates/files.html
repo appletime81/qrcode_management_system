@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+
+    <title>All files</title>
+</head>
+<body>
+<div class="row justify-content-center">
+    <h1>All files</h1>
+</div>
+<!-- search form -->
+<form action="/files/" method="get">
+    <input type="text" name="search" placeholder="Search">
+    <input type="submit" value="Search">
+</form>
+<ul>
+    {% for item in files %}
+    <li>ip address: {{ item[0] }}</li>
+    <li>root path: {{ item[1] }}</li>
+    <li>file name: {{ item[2] }}</li>
+    <li>add date: {{ item[3] }}</li>
+    <p>------------------------------------</p>
+    {% endfor %}
+</ul>
+</body>
+</html>
