@@ -21,8 +21,8 @@
         <form class="" action="/files/" method="get">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" name="params">
-                <button class="btn btn-primary" type="submit">Search</button>
             </div>
+
             <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id="filename" name="filename">
                 <label class="custom-control-label" for="filename">檔案名稱</label>
@@ -31,14 +31,50 @@
                 <input type="checkbox" class="custom-control-input" id="foldername" name="foldername">
                 <label class="custom-control-label" for="foldername">資料夾名稱</label>
             </div>
-            <!-- 檔案類型 -->
             <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id="date" name="date">
                 <label class="custom-control-label" for="date">建立日期</label>
             </div>
 
-        </form>
+            <div class="input-group mb-3 justify-content-center my-3">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
 
+        </form>
+    </div>
+</div>
+
+<div class="container my-5">
+    <div class="raw">
+        <div class="col text-center">
+            <a href="/files/?page=1&size={{ every_page_size }}&extension=dwg"
+               class="badge badge-light"><h6>dwg檔</h6>
+            </a>
+            <a href="/files/?page=1&size={{ every_page_size }}&extension=bak"
+               class="badge badge-light"><h6>bak檔</h6>
+            </a>
+            <a href="/files/?page=1&size={{ every_page_size }}&extension=step"
+               class="badge badge-light"><h6>step檔</h6>
+            </a>
+            <a href="/files/?page=1&size={{ every_page_size }}&extension=SLDASM"
+               class="badge badge-light"><h6>
+                SLDASM檔</h6></a>
+            <a href="/files/?page=1&size={{ every_page_size }}&extension=SLDPRT"
+               class="badge badge-light"><h6>
+                SLDPRT檔</h6></a>
+            <a href="/files/?page=1&size={{ every_page_size }}&extension=mp4"
+               class="badge badge-light"><h6>mp4檔</h6>
+            </a>
+            <a href="/files/?page=1&size={{ every_page_size }}&extension=pdf"
+               class="badge badge-light"><h6>pdf檔</h6>
+            </a>
+            <a href="/files/?page=1&size={{ every_page_size }}&extension=log"
+               class="badge badge-light"><h6>log檔</h6>
+            </a>
+            <a href="/files/?page=1&size={{ every_page_size }}&extension=txt"
+               class="badge badge-light"><h6>txt檔</h6>
+            </a>
+        </div>
     </div>
 </div>
 
@@ -67,13 +103,23 @@
 
 <!-- pages -->
 <nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-    {% for page_number in page_numbers %}
-        <li class="page-item"><a class="page-link" href="/files/?page={{ page_number }}&size=50">{{ page_number }}</a></li>
-    {% endfor %}
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-  </ul>
+    <ul class="pagination">
+        {% if current_page > 1 %}
+            <li class="page-item"><a class="page-link"
+                                     href="/files/?page={{ current_page - 1 }}&size={{ every_page_size }}}&extension={{ extension }}&params={{ params }}&filename={{ search_filename }}&foldername={{ search_folder }}&date={{ search_date }}">Previous</a>
+            </li>
+        {% endif %}
+        {% for page_number in page_numbers %}
+            <li class="page-item"><a class="page-link"
+                                     href="/files/?page={{ page_number }}&size={{ every_page_size }}&extension={{ extension }}&params={{ params }}&filename={{ search_filename }}&foldername={{ search_folder }}&date={{ search_date }}">{{ page_number }}</a>
+            </li>
+        {% endfor %}
+        {% if current_page < page_numbers|length %}
+            <li class="page-item"><a class="page-link"
+                                     href="/files/?page={{ current_page + 1 }}&size={{ every_page_size }}&extension={{ extension }}&params={{ params }}&filename={{ search_filename }}&foldername={{ search_folder }}&date={{ search_date }}">Next</a>
+            </li>
+        {% endif %}
+    </ul>
 </nav>
 <!-- jQuery and Bootstrap Bundle (includes Popper) -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
